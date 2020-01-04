@@ -12,7 +12,7 @@
    ``` 
    from django_filters.views import FilterView
    from django_tables2 import SingleTableMixin
-   MyFilterTableView(SaveFilterMixin,SingleTableMixin,FilterView):
+   class MyFilterTableView(SaveFilterMixin,SingleTableMixin,FilterView):
       model = MyModel
       filterset_class = MyModelFilter
       table_class = MyModelTable
