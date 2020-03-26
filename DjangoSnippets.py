@@ -43,3 +43,13 @@ class SaveFormMixin:
         if self.request.method == 'POST':
             self.request.session[f'{self.view_name}_form_initial']=form.data
         return form
+    
+class LimitExportMixin(ExportMixin):
+    EXPORT_LIMIT = 1000
+    def get_table_data(self):
+        qs = super().get_table_data()
+        if '_export' in self.request.GET.keys():
+            if len(qs)>1000: 
+                print('LIMITING SEND MESSAGE')
+                return qs[:self.EXPORT_LIMIT]
+        return qs
